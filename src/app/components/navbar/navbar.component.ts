@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {Router} from "@angular/router";
-import {AuthService} from "../auth.service";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
+import { Router } from "@angular/router";
+import { AuthService } from "../../services/auth-service/auth.service";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
 
 @Component({
   selector: 'app-navbar',

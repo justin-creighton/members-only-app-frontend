@@ -37,7 +37,7 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
-src/app/environment.ts
+/src/app/configs/firebase-config.ts
 
 # System files
 .DS_Store
