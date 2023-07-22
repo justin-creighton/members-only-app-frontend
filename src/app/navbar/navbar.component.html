@@ -1,0 +1,13 @@
+<nav>
+  <a routerLink="">
+    <h1 class="app-heading">Members Only app</h1>
+  </a>
+  <ng-container>
+    <button class="sign -out-button" (click)="onClickSignOut()">Sign Out</button>
+    <span>{{authService.userData}}</span>
+    <p class="logged-in-as space-before" *ngIf="authService.userData">
+      Logged in as
+      <span style="color: blue">{{authService.userData}}</span>
+    </p>
+  </ng-container>
+</nav>
