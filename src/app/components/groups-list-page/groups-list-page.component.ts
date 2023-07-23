@@ -33,7 +33,7 @@ export class GroupsListPageComponent implements OnInit, OnDestroy {
       this.isLoadingAllGroups = false;
 
       if (!this.isLoadingUserGroups) {
-        this.isLoading = true;
+        this.isLoading = false;
         this.calculateNonUserGroups();
       }
     });
@@ -43,7 +43,7 @@ export class GroupsListPageComponent implements OnInit, OnDestroy {
       this.isLoadingUserGroups = false;
 
       if (!this.isLoadingAllGroups) {
-        this.isLoading = true;
+        this.isLoading = false;
         this.calculateNonUserGroups();
       }
     });
