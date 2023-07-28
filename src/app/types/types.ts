@@ -7,4 +7,18 @@ export interface Group {
     name: string,
     owner: User,
     members: User[],
+    requests: Request[],
+    messages: Message[],
+}
+
+export interface Message {
+  userName: string,
+  text: string,
+}
+
+export interface Request {
+  id: string,
+  userName: string,
+  name: string,
+  owner: User,
 }

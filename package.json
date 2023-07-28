@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.config.json",
+    "create-firebase-file": "mkdir ./src/app/configs && touch ./src/app/configs/firebase-config.ts",
     "open": "npm start -o",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input, EventEmitter, Output} from '@angular/core';
+import {Request} from "../../types/types";
 
 @Component({
   selector: 'app-requests-list',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./requests-list.component.scss']
 })
 export class RequestsListComponent {
+  @Input() requests: Request[] = [];
+  @Input() messages: any;
+  @Output() accept = new EventEmitter<string>();
+  @Output() reject = new EventEmitter<string>();
 
+  onClickAccept(requestId: string) {
+    this.accept.emit(requestId);
+  }
+
+  onClickReject(requestId: string) {
+    this.reject.emit(requestId);
+  }
 }

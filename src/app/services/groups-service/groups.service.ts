@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable } from 'rxjs';
-import { Group } from 'src/app/types/types';
+import { Group, Request } from 'src/app/types/types';
 
 @Injectable({
   providedIn: 'root',
@@ -65,6 +65,79 @@ export class GroupsService {
                 this.httpOptionsWithAuthToken(token)
               )
               .subscribe((newGroupId) => observer.next(newGroupId));
+          }
+        });
+      });
+    });
+  }
+
+  getGroupById(groupId: string) {
+    return new Observable<Group | null>((observer) => {
+      this.auth.user.subscribe((user) => {
+        user?.getIdToken().then((token) => {
+          if (token) {
+            this.http
+              .get<Group | null>(
+                `/api/groups/${groupId}`,
+                this.httpOptionsWithAuthToken(token)
+              )
+              .subscribe((group) => {
+                observer.next(group);
+              });
+          }
+        });
+      });
+    });
+  }
+
+  addMessage(groupId: string, text: string): Observable<Group> {
+    return new Observable<Group>((observer) => {
+      this.auth.user.subscribe((user) => {
+        user?.getIdToken().then((token) => {
+          if (token) {
+            this.http
+              .post<Group>(
+                `/api/groups/${groupId}/messages`,
+                {text},
+                this.httpOptionsWithAuthToken(token)
+              )
+              .subscribe((updatedGroup) => observer.next(updatedGroup));
+          }
+        });
+      });
+    });
+  }
+
+  acceptRequest(requestId: string): Observable<Request[]> {
+    return new Observable<Request[]>((observer) => {
+      this.auth.user.subscribe((user) => {
+        user?.getIdToken().then((token) => {
+          if (token) {
+            this.http
+              .post<Request[]>(
+                `/api/requests/${requestId}/accept`,
+                {},
+                this.httpOptionsWithAuthToken(token)
+              )
+              .subscribe((updatedRequests) => observer.next(updatedRequests));
+          }
+        });
+      });
+    });
+  }
+
+  rejectRequest(requestId: string): Observable<Request[]> {
+    return new Observable<Request[]>((observer) => {
+      this.auth.user.subscribe((user) => {
+        user?.getIdToken().then((token) => {
+          if (token) {
+            this.http
+              .post<Request[]>(
+                `/api/groups/${requestId}/reject`,
+                {},
+                this.httpOptionsWithAuthToken(token)
+              )
+              .subscribe((updatedRequests) => observer.next(updatedRequests));
           }
         });
       });
